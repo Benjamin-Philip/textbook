@@ -1,0 +1,12 @@
+<!-- Graphviz, UML, and PlantUML diagrams with gravizo  -->
+<!-- usage: --
+  -- {{<gravizo background-color="#fff" title="Deployment scheme" alt="Deployment scheme" > --
+  -- diagram code--
+  -- </gravizo>}}-->
+<p>
+  <img src="//g.gravizo.com/svg?{{.Inner}}"
+  {{ with .Get "alt"}} alt="{{.}}"{{ end }}
+  {{ with .Get "title"}} title="{{.}}"{{ end }}
+  {{ with .Get "background-color"}} style="background-color: {{.}}"{{ end }}
+  />
+</p>
