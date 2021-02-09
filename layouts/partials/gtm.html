@@ -1,0 +1,94 @@
+<!--Google Tag Manager-->
+
+<!-- Taken from https://martijnvanvreeden.nl/how-to-add-google-tag-manager-to-hugo-static-website/-->
+
+<!-- We only want to run GTM when we have deployed it -->
+<!-- Hence we do not run it if the site is served to localhost -->
+{{ if not (in (.Site.BaseURL | string) "localhost") }}
+	{{ if .Site.Params.gtm_id}}
+
+		<!-- DNS-prefetch -->
+		<link href="https://www.googletagmanager.com" rel="preconnect" crossorigin>
+		<link rel="dns-prefetch" href="https://www.googletagmanager.com">{{ end }}
+		<!-- end DNS-prefetch -->
+
+		<!-- Google Tag Manager Data Layer for GA Custom Variables -->
+		<!-- See: https://developers.google.com/tag-manager/devguide-->
+
+		<!-- As the dataLayer is optional, we only include it if the theme user wants it-->
+		{{- if .Site.Params.gtm_datalayer}}
+			<script>
+				window.dataLayer = window.dataLayer || [];
+				window.dataLayer.push({
+
+					// Date of Expiry
+					{{- if .ExpiryDate}}
+						'pageExpiryDate': '{{ .ExpiryDate.format  "2006-01-02"  }}',
+					{{- end }}
+
+					// Date of Publication
+					'pagePublishDate': '{{ .PublishDate.Format "2006-01-02" }}',
+
+					// Date of last modification
+					'pageModifiedDate': '{{ .Lastmod.Format "2006-01-02"  }}',
+
+					// Reading information
+					{{- if eq .Kind "page" }}
+						'pageReadingTimeMinutes': {{ .ReadingTime }},
+						'pageReadingTimeSeconds': {{- $readTime := mul (div (countwords .Content) 220.0) 60 }}{{- math.Round $readTime}},
+						'pageWordCount': {{- .WordCount }},
+						'pageFuzzyWordCount': {{- .FuzzyWordCount }},
+					{{- else }}
+					{{- end }}
+
+					// Page Details
+					'pageKind': '{{ .Kind }}',
+					'pageId': '{{ with .File }}{{ .UniqueID }}{{ end }}',
+					'pageTitle': '{{ .LinkTitle }}',
+					'pagePermalink': '{{ .Permalink }}',
+					'pageType': '{{ .Type }}',
+					'pageTranslated': {{ .IsTranslated }},
+
+					// Author Details
+					{{- if .Params.author -}}
+						'pageAuthor': '{{ if .Params.author -}}
+											{{ .Params.author }}
+											{{- else if .Site.Author.name -}}
+											{{ .Site.Author.name }}
+										{{- end }}',
+					{{- end }}
+
+					// Taxonomy of the post (Classification)
+					{{- if .Params.categories}}
+						{{$category := index (.Params.categories) 0}}
+						'pageCategory':'{{ $category }}',
+					{{- end }}
+					{{- if .Params.tags}}
+						'pageTags':'{{ delimit .Params.tags "|" }}',
+					{{- end }}
+					{{- if .IsHome }}
+						'pageType2': 'home',
+					{{- else if eq .Kind "taxonomy" }}
+						'pageType2': 'tag',
+					{{- else if eq .Type "page" }}
+						'pageType2': 'page',
+					{{- else }}
+						'pageType2': 'post',
+					{{- end }}
+					'pageLanguage': '{{ .Language }}'});
+			</script>
+			<!-- End Google Tag Manager Data Layer for GA Custom Variables -->
+		{{- end}}
+		{{ if .Site.Params.gtm_id}}
+			<script>
+				(function(w,d,s,l,i){w[l]=w[l]||[];
+				 w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+				 var f=d.getElementsByTagName(s)[0] ,j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+				 j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;
+				 f.parentNode.insertBefore(j,f);})
+				(window,document,'script','dataLayer','{{ .Site.Params.gtm_id }}');
+			</script>
+		{{ end }}
+{{ end }}
+
+<!-- End Google Tag Manager -->

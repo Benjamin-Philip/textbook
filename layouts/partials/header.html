@@ -7,11 +7,20 @@
     <link rel="stylesheet" href="{{ "/css/style.css" | relURL }}" />
     <link rel="stylesheet" href="{{ "/css/fonts.css" | relURL }}" />
     {{ partial "head_custom.html" . }}
+
+    <!-- KaTeX-->
     {{ if or (.GetParam "hasMath") (.Site.katex.allPages)}}
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/contrib/auto-render.min.js"></script>
     {{ end }}
+    <!-- End KaTeX -->
+
+    <!-- Google Tag Manager -->
+    {{ if .Site.Params.gtm_id}}
+      {{- partial "gtm.html" . }}
+    {{ end }}
+    <!-- End Google Tag Manager-->
   </head>
 
   <body>
@@ -23,3 +32,11 @@
     </ul>
     <hr/>
     </nav>
+
+    <!-- iframe version of Google Tag Manager -->
+    {{ if .Site.Params.gtm_id}}
+      <noscript>
+        <iframe src="//www.googletagmanager.com/ns.html?id={{ .Site.Params.gtm_id }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript>
+    {{ end }}
+    <!-- End iframe version of Google Tag Manager -->  
