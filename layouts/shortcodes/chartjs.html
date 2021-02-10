@@ -1,0 +1,15 @@
+<!-- Chartjs using Quickchart -->
+
+<!-- usage:
+            {{<chartjs height=y width=y>
+            JSON/Javascript chart
+            </chartjs>}} -->
+
+<p>
+  <img src="https://quickchart.io/chart?"
+       c="{{.Inner}}"{{end}}
+       {{with .Get "height"}} h="{{.}}"{{end}}
+       {{with .Get "width"}} w="{{.}}"{{end}}>
+</p>
+
+<!-- End Chartjs using Quickchart -->
