@@ -3,6 +3,7 @@
   {{ with .Site.Params.footer }}
   <hr/>
   {{ . | markdownify }}
+  {{ end }}
   {{ if or (.GetParam "hasMath") (.Site.katex.allPages)}}
     <script>renderMathInElement(document.body);</script>
   {{ end }}
