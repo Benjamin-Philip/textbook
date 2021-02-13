@@ -6,7 +6,7 @@
     <title>{{ .Title }} | {{ .Site.Title }}</title>
     <link rel="stylesheet" href="{{ "/css/style.css" | relURL }}" />
     <link rel="stylesheet" href="{{ "/css/fonts.css" | relURL }}" />
-    {{ partial "head_custom.html" . }}
+    {{ partial "head/head_custom.html" . }}
 
     <!-- KaTeX-->
     {{ if or (.GetParam "hasMath") (.Site.katex.allPages)}}
@@ -18,7 +18,7 @@
 
     <!-- Google Tag Manager -->
     {{ if .Site.Params.gtm_id}}
-      {{- partial "gtm.html" . }}
+      {{- partial "header/gtm.html" . }}
     {{ end }}
     <!-- End Google Tag Manager-->
   </head>
