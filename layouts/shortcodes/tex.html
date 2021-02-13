@@ -1,8 +1,9 @@
-<!-- Hugo TeX shortcode
+{{/* Hugo TeX shortcode
      usage:
          inline eqn:       {{< tex "eqn here" >}}
          display mode eqn: {{< tex display="eqn here" >}}
--->
+*/}}
+
 <span class="jsonly">
     {{ if .IsNamedParams }} <!-- display mode, wrap eqn with $$ $$-->
         $${{ .Get "display" }}$$
