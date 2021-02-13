@@ -6,7 +6,7 @@ license = "MIT"
 licenselink = "https://github.com/benjamin-philip/textbook/blob/master/LICENSE"
 description = "A theme designed for attempting classic Textbook"
 homepage = "http://example.com/"
-tags = [technical, book]
+tags = ["technical", "book"]
 features = []
 min_version = "0.41.0"
 
