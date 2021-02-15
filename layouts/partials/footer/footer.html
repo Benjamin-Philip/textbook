@@ -4,7 +4,7 @@
   <hr/>
   {{ . | markdownify }}
   {{ end }}
-  {{ if (and (or (.GetParam "math") (.Site.Params.math.allPages)) .Site.markup.math.katex)}}
+  {{ if (and (or (.GetParam "math") (.Site.Params.math.allPages)) .Site.Params.math.katex)}}
     <script>renderMathInElement(document.body);</script>
   {{ end }}
   </footer>
