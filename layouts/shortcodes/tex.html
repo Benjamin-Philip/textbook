@@ -20,10 +20,10 @@
     <noscript>
         {{ if (and (.IsNamedParams) (.Get "display")) }} <!-- display mode -->
             <div style="text-align:center;">
-                <img src="https://latex.codecogs.com/gif.latex?{{ .Get "display" }}" title="{{ .Get "display" }}" />
+                <img src="https://latex.codecogs.com/gif.latex?{{ .Inner }}" title="display-math" />
             </div>
         {{ else }}              <!-- inline mode -->
-            <img style="display:inline;vertical-align:middle;" src="https://latex.codecogs.com/svg.latex?\inline&space;{{ .Inner }}" title="{{ .Get 0 }}" />
+            <img style="display:inline;vertical-align:middle;" src="https://latex.codecogs.com/svg.latex?\inline&space;{{ .Inner }}" title="{{ .Inner }}" />
         {{ end }}
     </noscript>
 
@@ -31,9 +31,9 @@
 {{else}}
     {{ if (and (.IsNamedParams) (.Get "display"))}} <!-- display mode -->
         <div style="text-align:center;">
-            <img src="https://latex.codecogs.com/gif.latex?{{ .Inner }}" title="{{ .Get "display" }}" />
+            <img src="https://latex.codecogs.com/gif.latex?{{ .Inner }}" title="display-math" />
         </div>
     {{ else }}              <!-- inline mode -->
-    <img style="display:inline;vertical-align:middle;" src="https://latex.codecogs.com/svg.latex?\inline&space;{{ .Inner  }}" title="{{ .Get 0 }}" />
+    <img style="display:inline;vertical-align:middle;" src="https://latex.codecogs.com/svg.latex?\inline&space;{{ .Inner  }}" title="{{ .Inner  }}" />
     {{ end }}
 {{ end }}
