@@ -13,8 +13,8 @@
     <span class="jsonly">
         {{ if (and (.IsNamedParams) (.Get "display"))}} <!-- display mode, wrap eqn with $$ $$-->
             $${{ .Inner }}$$
-        {{ else }}              <!-- inline mode, wrap eqn with \(  \)-->
-            \({{ .Inner }}\)
+        {{ else }}              <!-- inline mode, wrap eqn with \\(  \\)-->
+            \\({{ .Inner }}\\)
         {{ end }}
     </span>
     <noscript>
