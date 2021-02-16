@@ -1,34 +1,39 @@
 {{/* Hugo TeX shortcode
      usage:
-         inline eqn:       {{< tex "eqn here" >}}
-         display mode eqn: {{< tex display="eqn here" >}}
+        inline eqn:       {{<tex>
+                          eqn here
+                          </tex>}}
+        display mode eqn:
+                          {{<tex display=true>
+                          eqn here
+                          </tex>}}
 */}}
 <!-- If we use katex -->
 {{if .Site.Params.math.katex}}
     <span class="jsonly">
-        {{ if .IsNamedParams }} <!-- display mode, wrap eqn with $$ $$-->
-            $${{ .Get "display" }}$$
+        {{ if (and (.IsNamedParams) (.Get "display"))}} <!-- display mode, wrap eqn with $$ $$-->
+            $${{ .Inner }}$$
         {{ else }}              <!-- inline mode, wrap eqn with \(  \)-->
-            \({{ .Get 0 }}\)
+            \({{ .Inner }}\)
         {{ end }}
     </span>
     <noscript>
-        {{ if .IsNamedParams }} <!-- display mode -->
+        {{ if (and (.IsNamedParams) (.Get "display")) }} <!-- display mode -->
             <div style="text-align:center;">
                 <img src="https://latex.codecogs.com/gif.latex?{{ .Get "display" }}" title="{{ .Get "display" }}" />
             </div>
         {{ else }}              <!-- inline mode -->
-            <img style="display:inline;vertical-align:middle;" src="https://latex.codecogs.com/svg.latex?\inline&space;{{ .Get 0 }}" title="{{ .Get 0 }}" />
+            <img style="display:inline;vertical-align:middle;" src="https://latex.codecogs.com/svg.latex?\inline&space;{{ .Inner }}" title="{{ .Get 0 }}" />
         {{ end }}
     </noscript>
 
-<!-- If we do not use katex -->
+    <!-- If we do not use katex -->
 {{else}}
-    {{ if .IsNamedParams }} <!-- display mode -->
+    {{ if (and (.IsNamedParams) (.Get "display"))}} <!-- display mode -->
         <div style="text-align:center;">
-            <img src="https://latex.codecogs.com/gif.latex?{{ .Get "display" }}" title="{{ .Get "display" }}" />
+            <img src="https://latex.codecogs.com/gif.latex?{{ .Inner }}" title="{{ .Get "display" }}" />
         </div>
     {{ else }}              <!-- inline mode -->
-    <img style="display:inline;vertical-align:middle;" src="https://latex.codecogs.com/svg.latex?\inline&space;{{ .Get 0 }}" title="{{ .Get 0 }}" />
+    <img style="display:inline;vertical-align:middle;" src="https://latex.codecogs.com/svg.latex?\inline&space;{{ .Inner  }}" title="{{ .Get 0 }}" />
     {{ end }}
 {{ end }}
