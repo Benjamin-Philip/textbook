@@ -11,11 +11,11 @@
 <!-- If we use katex -->
 {{if .Site.Params.math.katex}}
     <span class="jsonly">
-        {{ if (and (.IsNamedParams) (.Get "display"))}} <!-- display mode, wrap eqn with $$ $$-->
-            $${{ .Inner }}$$
-        {{ else }}              <!-- inline mode, wrap eqn with \\(  \\)-->
-            \\({{ .Inner }}\\)
-        {{ end }}
+    {{ if (and (.IsNamedParams) (.Get "display"))}} <!-- display mode, wrap eqn with $$ $$-->
+        $${{ .Inner | safeHTML}}$$
+    {{ else }}              <!-- inline mode, wrap eqn with \(  \)-->
+        \({{ .Inner | safeHTML}}\)
+    {{ end }}
     </span>
     <noscript>
         {{ if (and (.IsNamedParams) (.Get "display")) }} <!-- display mode -->
