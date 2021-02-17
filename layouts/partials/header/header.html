@@ -16,6 +16,12 @@
     {{ end }}
     <!-- End KaTeX -->
 
+    <!-- Hide TeX source -->
+      <noscript>
+          <style>.jsonly { display: none }</style>
+      </noscript>
+    <!-- End Hide TeX source -->
+
     <!-- Google Tag Manager -->
     {{ if .Site.Params.gtm_id}}
       {{- partial "header/gtm.html" . }}
